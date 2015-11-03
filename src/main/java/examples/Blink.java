@@ -43,7 +43,7 @@ public class Blink extends Animation {
 		PixelStrip strip1 = fadeCandy.addPixelStrip(PIXELSTRIP_PIN, 8);
 
 		strip1.setAnimation(new Blink());
-		for (int i=0; i<4; i++) {
+		for (int i=0; i<1000; i++) {
 			server.animate();
 			Thread.sleep(100);
 		}
