@@ -70,6 +70,7 @@ public class Pulsing extends Animation {
 		int FC_SERVER_PORT = Integer.parseInt(System.getProperty("fadecandy.port", "7890"));
 		int PIXELSTRIP_PIN = Integer.parseInt(System.getProperty("pixelStrip", "0"));
 		boolean verbose = "true".equalsIgnoreCase(System.getProperty("verbose", "false"));
+		
 		OpcClient server = new OpcClient(FC_SERVER_HOST, FC_SERVER_PORT);
 		server.setVerbose(verbose);
 		server.setSingleStripNum(PIXELSTRIP_PIN);
