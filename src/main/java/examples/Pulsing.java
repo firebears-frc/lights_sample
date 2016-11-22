@@ -1,9 +1,6 @@
 package examples;
 
-import opc.Animation;
-import opc.OpcClient;
-import opc.OpcDevice;
-import opc.PixelStrip;
+import opc.*;
 
 /**
  * Example animation that pulses all pixels through an array of colors.
@@ -66,17 +63,18 @@ public class Pulsing extends Animation {
 
 
 	public static void main(String[] args) throws Exception {
-		String FC_SERVER_HOST = System.getProperty("fadecandy.server", "raspberrypi.local");
-		int FC_SERVER_PORT = Integer.parseInt(System.getProperty("fadecandy.port", "7890"));
-		int PIXELSTRIP_PIN = Integer.parseInt(System.getProperty("pixelStrip", "0"));
-		boolean verbose = "true".equalsIgnoreCase(System.getProperty("verbose", "false"));
+		final String FC_SERVER_HOST = System.getProperty("fadecandy.server", "raspberrypi.local");
+		final int FC_SERVER_PORT = Integer.parseInt(System.getProperty("fadecandy.port", "7890"));
+		final int STRIP1_COUNT = Integer.parseInt(System.getProperty("fadecandy.strip1.count", "8"));
+		final int PIXELSTRIP_PIN = Integer.parseInt(System.getProperty("pixelStrip", "0"));
+		final boolean VERBOSE = "true".equalsIgnoreCase(System.getProperty("verbose", "false"));
 		
 		OpcClient server = new OpcClient(FC_SERVER_HOST, FC_SERVER_PORT);
-		server.setVerbose(verbose);
+		server.setVerbose(VERBOSE);
 		server.setSingleStripNum(PIXELSTRIP_PIN);
 		OpcDevice fadeCandy = server.addDevice();
 
-		PixelStrip strip1 = fadeCandy.addPixelStrip(PIXELSTRIP_PIN, 8);
+		PixelStrip strip1 = fadeCandy.addPixelStrip(PIXELSTRIP_PIN, STRIP1_COUNT);
 		System.out.println(server.getConfig());
 
 		strip1.setAnimation(new Pulsing());
